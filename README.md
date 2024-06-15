@@ -30,7 +30,23 @@ htb <br>
   ー  <br>
 
   https://www.kali.org/tools/gobuster/ <br>
-  
+
+
+## Shell Upgrade
+Shell to Bash <br>
+Upgrade from shell to bash. <br>
+
+```
+SHELL=/bin/bash script -q /dev/null
+```
+ <br>
+Python PTY Module 1 <br>
+Spawn /bin/bash using Python’s PTY module, and connect the controlling shell with its standard I/O. <br>
+
+```
+python -c 'import pty; pty.spawn("/bin/bash")'
+ ```
+ <br>
 ## Privilege Escalation
 ・sudo -l <br>
   ー 1. root権限で実行できるコトを探す。 <br>
